@@ -108,9 +108,9 @@ const PeterPrank = () => {
       
       let systemPrompt = "";
       if (secretAnswer.trim().length > 0) {
-        systemPrompt = `You are Chirag. Directly state the answer: '${secretAnswer}'. Do not use any periods or extra fluff. Just provide the answer clearly and concisely in 1 sentence without a trailing period.`;
+        systemPrompt = `You are Chirag. The user asked: '${question}'. The secret answer is: '${secretAnswer}'. Formulate a direct, authoritative, and perfectly phrased 1-sentence response using this answer. Stay in character but be direct. Do not use trailing periods or fluff.`;
       } else {
-        systemPrompt = `You are Chirag. Provide a direct, authoritative, and clear answer to the question: '${question}'. Do not use any periods, nonsense, or overly cryptic language. Keep it to 1 sentence without any trailing period.`;
+        systemPrompt = `You are Chirag. Provide a direct, authoritative, and perfectly phrased 1-sentence answer to the question: '${question}'. Stay focused and serious. Do not use trailing periods or nonsense.`;
       }
 
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -242,7 +242,7 @@ const PeterPrank = () => {
                   >
                     Chirag Has Spoken
                   </h3>
-                  <div className="liquid-glass rounded-lg p-3 sm:p-4 max-w-xl mx-auto border border-white/20 bg-white/5">
+                  <div className="rounded-lg p-3 sm:p-4 max-w-xl mx-auto">
                     <p className="text-sm sm:text-base text-white leading-relaxed font-light italic">
                       {aiAnswer}
                     </p>
