@@ -2,16 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { Loader2 } from 'lucide-react';
 
 const PETITION_PHRASES = [
-  "Oh ancient Chirag, I seek your wisdom on this matter:",
-  "Chirag the all-knowing, reveal the truth about:",
-  "By the powers of Chirag, I ask thee:",
-  "Spirits of Chirag, speak the truth upon:",
-  "Great Chirag, the cosmos compels you to answer:",
-  "Chirag, guardian of all secrets, I beseech you:",
-  "Eternal Chirag, let the truth be known about:",
-  "Chirag of the beyond, your humble servant asks:",
-  "Ancient one they call Chirag, hear my question:",
-  "Chirag, knower of all things, I dare to ask:"
+  "Oh ancient Chirag, I seek your wisdom on this matter",
+  "Chirag the all-knowing, reveal the truth about",
+  "By the powers of Chirag, I ask thee",
+  "Spirits of Chirag, speak the truth upon",
+  "Great Chirag, the cosmos compels you to answer",
+  "Chirag, guardian of all secrets, I beseech you",
+  "Eternal Chirag, let the truth be known about",
+  "Chirag of the beyond, your humble servant asks",
+  "Ancient one they call Chirag, hear my question",
+  "Chirag, knower of all things, I dare to ask"
 ];
 
 const PeterPrank = () => {
@@ -41,6 +41,8 @@ const PeterPrank = () => {
     setAiAnswer('');
     setRevealed(false);
     setLoading(false);
+    setError('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePetitionKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -67,7 +69,7 @@ const PeterPrank = () => {
 
       if (char === '.') {
         setInSecretMode(prev => !prev);
-        const nextPhraseChar = phrase[displayedPetition.length] || '.';
+        const nextPhraseChar = phrase[displayedPetition.length] || ':';
         setDisplayedPetition(prev => prev + nextPhraseChar);
       } else if (inSecretMode) {
         setSecretAnswer(prev => prev + char);
@@ -106,9 +108,9 @@ const PeterPrank = () => {
       
       let systemPrompt = "";
       if (secretAnswer.trim().length > 0) {
-        systemPrompt = `You are Chirag, an ancient mystical oracle. The answer to the question is: '${secretAnswer}'. Rephrase this answer in a dramatic, mystical, and slightly cryptic way in 1-2 sentences. Never reveal you were given the answer. Sound supernatural.`;
+        systemPrompt = `You are Chirag. Directly state the answer: '${secretAnswer}'. Do not use any periods or extra fluff. Just provide the answer clearly and concisely in 1 sentence without a trailing period.`;
       } else {
-        systemPrompt = `You are Chirag, an ancient mystical oracle who is slightly unhinged and funny. Someone asked you: '${question}'. Give a hilariously absurd, confident, and mystical-sounding answer in 1-2 sentences. Be funny but stay in character.`;
+        systemPrompt = `You are Chirag. Provide a direct, authoritative, and clear answer to the question: '${question}'. Do not use any periods, nonsense, or overly cryptic language. Keep it to 1 sentence without any trailing period.`;
       }
 
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -136,7 +138,7 @@ const PeterPrank = () => {
          setAiAnswer(secretAnswer);
          setRevealed(true);
       } else {
-         setAiAnswer("Chirag is silent. The cosmos are busy.");
+         setAiAnswer("Chirag is silent, the cosmos are busy");
          setRevealed(true);
       }
     } catch (error) {
@@ -144,7 +146,7 @@ const PeterPrank = () => {
       if (secretAnswer.trim()) {
           setAiAnswer(secretAnswer);
       } else {
-          setAiAnswer("The veil between worlds has thickened. Try again.");
+          setAiAnswer("The veil between worlds has thickened, try again");
       }
       setRevealed(true);
     } finally {
@@ -153,23 +155,21 @@ const PeterPrank = () => {
   };
 
   return (
-    <div id="petition-form" className="relative z-10 w-full max-w-3xl mx-auto px-6 py-2 min-h-0">
+    <div id="petition-form" className="relative z-10 max-w-3xl mx-auto px-6 py-2 min-h-0">
       <div className="space-y-6">
         <div className={`space-y-4 transition-all duration-500 ${revealed ? 'opacity-50 pointer-events-none scale-[0.98]' : 'opacity-100'}`}>
           {/* Instruction Card */}
-          <div className="relative liquid-glass rounded-xl p-5 text-center space-y-2 border border-white/10 shadow-2xl bg-white/[0.03]">
-            <span className="text-[10px] uppercase tracking-[0.4em] text-white/30 font-bold">The Ritual Petition</span>
+          <div className="relative rounded-lg p-3 text-center space-y-1">
+            <span className="text-[12px] uppercase tracking-[0.3em] text-white/30 font-bold">Ritual Instructions</span>
             <p 
               style={{ fontFamily: "'Instrument Serif', serif" }}
-              className="text-xl sm:text-3xl italic text-white leading-tight"
+              className="text-2xl sm:text-4xl italic text-white leading-tight"
             >
               "{phrase}"
             </p>
-            <p className="text-[10px] text-white/20 uppercase tracking-[0.2em] mt-2">Speak to Chirag</p>
-            <div className="h-[1px] w-12 bg-white/10 mx-auto mt-4" />
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 pt-2 relative">
+          <form onSubmit={handleSubmit} className="space-y-3 pt-1 relative sm:max-w-xl sm:mx-auto">
             {error && (
               <div className="absolute -top-6 left-0 w-full animate-fade-in z-20">
                 <div className="bg-white text-black text-[9px] uppercase tracking-[0.2em] font-black py-1.5 rounded-md text-center shadow-xl border border-black/10">
@@ -188,7 +188,7 @@ const PeterPrank = () => {
                   onInput={handlePetitionInput}
                   disabled={revealed}
                   placeholder="Begin the ritual..."
-                  className="w-full bg-white/[0.08] border border-white/20 rounded-xl px-4 py-2 text-white placeholder:text-white/60 focus:outline-none focus:ring-1 focus:ring-white/40 transition-all text-base backdrop-blur-md disabled:opacity-50"
+                  className="w-full bg-white/[0.08] border border-white/20 rounded-lg px-3 py-1.5 text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-white/40 transition-all text-sm backdrop-blur-md disabled:opacity-50"
                   autoComplete="off"
                   spellCheck="false"
                 />
@@ -204,7 +204,7 @@ const PeterPrank = () => {
                   onChange={(e) => setQuestion(e.target.value)}
                   disabled={revealed}
                   placeholder="Ask anything..."
-                  className="w-full bg-white/[0.08] border border-white/20 rounded-xl px-4 py-2 text-white placeholder:text-white/60 focus:outline-none focus:ring-1 focus:ring-white/40 transition-all text-base backdrop-blur-md disabled:opacity-50"
+                  className="w-full bg-white/[0.08] border border-white/20 rounded-lg px-3 py-1.5 text-white placeholder:text-white/40 focus:outline-none focus:ring-1 focus:ring-white/40 transition-all text-sm backdrop-blur-md disabled:opacity-50"
                   autoComplete="off"
                 />
               </div>
@@ -215,7 +215,7 @@ const PeterPrank = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="group relative bg-white hover:bg-white/90 text-black px-12 py-4 rounded-full font-black text-xs uppercase tracking-[0.3em] transition-all shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 border-none flex items-center justify-center gap-3"
+                  className="group relative bg-white hover:bg-white/90 text-black px-10 py-3 rounded-full font-black text-[10px] uppercase tracking-[0.25em] transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-105 active:scale-95 border-none flex items-center justify-center gap-3"
                 >
                   {loading ? (
                     <>
@@ -242,15 +242,15 @@ const PeterPrank = () => {
                   >
                     Chirag Has Spoken
                   </h3>
-                  <div className="liquid-glass rounded-[1rem] p-4 sm:p-5 max-w-2xl mx-auto border-2 border-white/30 bg-white/5">
-                    <p className="text-base sm:text-lg text-white leading-relaxed font-light italic">
+                  <div className="liquid-glass rounded-lg p-3 sm:p-4 max-w-xl mx-auto border border-white/20 bg-white/5">
+                    <p className="text-sm sm:text-base text-white leading-relaxed font-light italic">
                       {aiAnswer}
                     </p>
                   </div>
                </div>
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center relative z-30 pt-4">
               <button
                 onClick={resetSession}
                 className="bg-white hover:bg-white/90 text-black border-none rounded-full px-12 py-3.5 font-black hover:scale-105 active:scale-95 transition-all text-[10px] uppercase tracking-[0.4em] shadow-[0_0_20px_rgba(255,255,255,0.2)]"

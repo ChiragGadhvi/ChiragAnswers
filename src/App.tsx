@@ -18,7 +18,7 @@ function App() {
       <main className="relative z-10 w-full h-full flex flex-col items-center">
         <Navbar onHome={goToHome} />
         
-        <div className="flex-grow flex flex-col items-center justify-start pt-[20vh] sm:pt-[4vh] w-full max-w-7xl mx-auto px-6 overflow-hidden">
+        <div className={`flex-grow flex flex-col items-center justify-start ${isStarted ? 'pt-[4vh]' : 'pt-[20vh]'} sm:pt-[4vh] w-full max-w-7xl mx-auto px-6`}>
           {!isStarted ? (
             <Hero onStart={() => setIsStarted(true)} />
           ) : (
