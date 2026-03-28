@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# 🔮 Chirag Answers
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> "He knows. He always knows."
 
-Currently, two official plugins are available:
+A cinematic, mystical prank application designed to wow and baffle. Chirag Answers is a modern take on the classic "virtual tarot" or "secret knowledge" prank, powered by AI and clever deceptive inputs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Chirag Answers Preview](./public/preview.png)
 
-## React Compiler
+## 🎭 The Prank
+The application features a "Secret Mode" triggered during the **Ritual Petition**. By typing a period (`.`) at any point in the petition, the input field stops displaying what you type and instead shows the standard mystical petition. Your true typing is secretly captured and used as the answer.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+If you don't use the secret mode, the application invokes **Chirag** (powered by Gemini 2.0 Flash) to provide a ritualistic, cryptic, and often unhinged answer to your question.
 
-## Expanding the ESLint configuration
+## ✨ Features
+- **Cinematic Experience:** High-contrast, glassmorphic UI with a beautiful celestial background.
+- **Ritual Flow:** A two-step process (Petition & Question) designed to build anticipation.
+- **AI-Powered:** Deeply integrated with OpenRouter/Gemini 2.0 Flash for mystical oracular responses.
+- **Offline Reliability:** If the API is unavailable, the application automatically falls back to your secretly typed answer.
+- **Validation System:** Visual notifications guide the user through the ritual requirements.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
+- **Framework:** React + Vite
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + Lucide React
+- **Typography:** Instrument Serif (Italic) & Custom Monospace
+- **API:** OpenRouter (Gemini 2.0 Flash 001)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Setup & Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repo-url>
+   cd chirag-answers
+   ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. **Configure Environment:**
+   Create a `.env` file in the root directory (already added to .gitignore):
+   ```env
+   VITE_OPENROUTER_API_KEY=your_api_key_here
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+4. **Run Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+5. **Build for Production:**
+   ```bash
+   npm run build
+   ```
+
+## 📜 Acknowledgments
+Inspired by the timeless tradition of virtual oracles, transformed for 2026 with modern AI and premium aesthetics.
+
+---
+
+*Note: This is a prank tool. Use responsibly!*
