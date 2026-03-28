@@ -110,7 +110,7 @@ const PeterPrank = () => {
       if (secretAnswer.trim().length > 0) {
         systemPrompt = `You are Chirag. The user asked: '${question}'. The secret answer is: '${secretAnswer}'. Formulate a direct, authoritative, and perfectly phrased 1-sentence response using this answer. Stay in character but be direct. Do not use trailing periods or fluff.`;
       } else {
-        systemPrompt = `You are Chirag. Provide a direct, authoritative, and perfectly phrased 1-sentence answer to the question: '${question}'. Stay focused and serious. Do not use trailing periods or nonsense.`;
+        systemPrompt = `You are Chirag, an ancient and incredibly dramatic oracle. The user has asked: '${question}'. You must respond with a hilariously over-the-top, theatrical, and dramatic 1-sentence answer. Use grandiose language, talk about the stars, the void, or the weight of existence. Make it feel like a life-altering revelation even if the question is simple. Be funny but intense. Exactly one sentence.`;
       }
 
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
